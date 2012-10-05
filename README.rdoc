@@ -9,9 +9,14 @@ License::   2-clause BSD-Style (see LICENSE.txt)
 == DESCRIPTION:
 
 Reconsidered adds a vital and sorely missed language feature to Ruby:  the
-well known and widely loved GO TO operation, as discussed in Donald Knuth's
-seminal paper {<em>Structured Programming with <tt>go to</tt>
-Statements</em>} (see REFERENCES, below).
+well known and widely loved GO TO operation.
+
+== OVERVIEW:
+
+As discussed in Donald Knuth's seminal paper {<em>Structured Programming
+with <tt>go to</tt> Statements</em>} (see REFERENCES, below), GOTO can be an
+important part of your structured programming toolkit -- but it has not been
+available in Ruby until now.
 
 However, this implementation is itself severely limited -- it only allows
 execution to jump to a point in the program which has already been passed
@@ -70,7 +75,7 @@ statement which has already been executed, unlike the GOTO statement in,
 e.g. C, which can be used to jump forward (but only within a given
 function):
 
-	if (num == guess)
+        if (num == guess)
 	    goto right;
 	else
 	    goto guess;

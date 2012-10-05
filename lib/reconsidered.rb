@@ -7,7 +7,7 @@
 require 'continuation' unless RUBY_VERSION.start_with?("1.8")
 
 module Reconsidered
-  VERSION = '0.9'
+  VERSION = '0.9.1'
 
   # Exception thrown if you __goto__ a non-existent label
   class NoSuchLabel < StandardError
