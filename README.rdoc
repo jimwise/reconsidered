@@ -77,8 +77,8 @@ function):
 
         if (num == guess)
           goto right;
-	else
-	  goto guess;
+        else
+          goto guess;
 
       right:
         puts("Right!")
