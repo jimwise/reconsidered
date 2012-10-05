@@ -1,0 +1,169 @@
+= reconsidered
+
+https://github.com/jimwise/reconsidered
+
+Author::    Jim Wise  (mailto:jwise@draga.com)
+Copyright:: Copyright (c) 2012 Jim Wise
+License::   2-clause BSD-Style (see LICENSE.txt)
+
+== DESCRIPTION:
+
+Reconsidered adds a vital and sorely missed language feature to Ruby:  the
+well known and widely loved GO TO operation, as discussed in Donald Knuth's
+seminal paper {<em>Structured Programming with <tt>go to</tt>
+Statements</em>}[rdoc-label:references].
+
+However, this implementation is itself severely limited -- it only allows
+execution to jump to a point in the program which has already been passed
+during execution of the program; it is thus less general purpose a tool than
+the true GOTO of languages such as Fortran.
+
+== REQUIREMENTS:
+
+<b>This code will not work in JRuby or MacRuby (no callcc).  It is tested
+(and should work fine) in Ruby 1.8.7 and 1.9.3.</b>
+
+== INSTALL:
+
+To install: 
+
+    $ gem install reconsidered
+
+== SYNOPSIS:
+
+=== General usage
+
+The syntax here mirrors that of the optional __goto__ extension included
+(disabled by default) as a {joke}[rdoc-label:references] in the Ruby 1.9 sources
+
+You may label any point in your program with the Kernel#__label__ statement, as
+in:
+
+	__label__ 10
+	puts "Hello, world!"
+
+or
+
+	__label__ :guess
+	print "Can you guess it? "
+
+This creates a <em>global label</em>, which you may return to at any point
+in your program using the Kernel#__goto__ statement, as in:
+
+      __goto__ 10
+
+or
+
+	guess = gets.to_i
+	if num != guess
+	    puts "Wrong!"
+	    __goto__ :guess
+	else
+	    puts "Right!"
+	end
+
+The __goto__ statement will immediately resume execution from the last point
+at which __label__ was called with the same value.
+
+Note that this implies that you may only use __goto__ to return to a __label__
+statement which has already been executed, unlike the GOTO statement in,
+e.g. C, which can be used to jump forward (but only within a given
+function):
+
+	if (num == guess)
+	    goto right;
+	else
+	    goto guess;
+
+    right:
+        puts("Right!")
+
+=== Local Scope
+
+In addition to the default global scope used with __label__ and __goto__,
+you can allocate a private scope of labels using the Reconsidered::Labels
+class.  This class provides methods Labels#label and Lables#goto which can
+be used as follows:
+
+    l = Reconsidered::Labels.new
+    acc = 0
+    l.label 30
+    acc = acc + 1
+    if acc < 10
+      l.goto 30
+    end
+
+this not only provides a private set of objects (not overlapping with other
+use of __label__ and __goto__), but has the added advantage that all memory
+used to store labels within such an object is freed when the object is
+garbage collected.
+
+== DEVELOPERS:
+
+After checking out the source, run:
+
+  $ rake newb
+
+This task will install any missing dependencies, run the tests/specs,
+and generate the RDoc.
+
+== {REFERENCES}[rdoc-label::references]:
+
+For competing views on GOTO as a language feature, see
+
+* Knuth, Donald E. {<em>Structured Programming with <tt>go to</tt>
+  Statements</em>}[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.103.6084&rep=rep1&type=pdf],
+  in <em>Computing Surveys</em>, Vol 6, No 4, 1974
+
+* Dijkstra, Edsger W., {<em><tt>go to</tt> Statement Considered
+  Harmful</em>}[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.132.875&rep=rep1&type=pdf]
+  in <em>Communications of the ACM</em>, Vol. 11, No. 3, 1968
+
+For information on the implementation strategy used here (and the general
+equivalence of the more powerful call-with-current-continuation operation to
+<tt>go to</tt>), see
+
+* Steele, Guy Lewis, Jr., {<em>Debunking the 'Expensive Procedure Call'
+  Myth, or, Procedure Call Implementations Considered Harmful, or, Lambda:
+  The Ultimate
+  <tt>GOTO</tt></em>}[http://dspace.mit.edu/handle/1721.1/5753], MIT
+  Artificial Intelligence Memo AIM-443, 1977
+
+For information on Ruby's implementation of call-with-current-continuation
+see
+
+* {<em>Ruby Core Documentation:
+  Continuation</em>}[http://www.ruby-doc.org/core-1.9.3/Continuation.html],
+  Ruby Core Documentation, Version 1.9.3
+
+For information on the (different, and less limited) implementation provided
+in ruby 1.9 as a language feature, but disabled by default, see
+
+* Shaugnessy, Pat {<em>The Joke Is On Us: How Ruby 1.9 Supports the <tt>Goto</tt>
+  Statement</em>}[http://patshaughnessy.net/2012/2/29/the-joke-is-on-us-how-ruby-1-9-supports-the-goto-statement],
+  <em>patshaugnessy.net</em> blog, February 29, 2012
+
+== LICENSE:
+
+(The MIT License)
+
+Copyright (c) 2012 FIX
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

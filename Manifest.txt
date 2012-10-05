@@ -1,6 +1,8 @@
 .autotest
 History.txt
+LICENSE.txt
 Manifest.txt
+README.rdoc
 README.txt
 Rakefile
 examples/guessing.rb
