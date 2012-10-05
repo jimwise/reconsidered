@@ -39,13 +39,13 @@ The syntax here mirrors that of the optional __goto__ extension included
 You may label any point in your program with the Kernel#__label__ statement, as
 in:
 
-	__label__ 10
-	puts "Hello, world!"
+      __label__ 10
+      puts "Hello, world!"
 
 or
 
-	__label__ :guess
-	print "Can you guess it? "
+      __label__ :guess
+      print "Can you guess it? "
 
 This creates a <em>global label</em>, which you may return to at any point
 in your program using the Kernel#__goto__ statement, as in:
@@ -54,13 +54,13 @@ in your program using the Kernel#__goto__ statement, as in:
 
 or
 
-	guess = gets.to_i
-	if num != guess
-	    puts "Wrong!"
-	    __goto__ :guess
-	else
-	    puts "Right!"
-	end
+      guess = gets.to_i
+      if num != guess
+        puts "Wrong!"
+        __goto__ :guess
+      else
+        puts "Right!"
+      end
 
 The __goto__ statement will immediately resume execution from the last point
 at which __label__ was called with the same value.
