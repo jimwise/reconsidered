@@ -3,6 +3,7 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/reconsidered
+examples/guessing.rb
+examples/simple.rb
 lib/reconsidered.rb
 test/test_reconsidered.rb
