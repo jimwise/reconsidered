@@ -85,7 +85,7 @@ defined), you're gonna have a hard time (and raise a
 Reconsidered::NoSuchLabel exception).
 
 
-=== Local Scope
+=== Private Labels
 
 In addition to the default global scope used with __label__ and __goto__,
 you can allocate a private scope of labels using the Reconsidered::Labels
