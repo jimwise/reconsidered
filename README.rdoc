@@ -11,7 +11,7 @@ License::   2-clause BSD-Style (see LICENSE.txt)
 Reconsidered adds a vital and sorely missed language feature to Ruby:  the
 well known and widely loved GO TO operation, as discussed in Donald Knuth's
 seminal paper {<em>Structured Programming with <tt>go to</tt>
-Statements</em>}[rdoc-label:references].
+Statements</em>} (see REFERENCES, below).
 
 However, this implementation is itself severely limited -- it only allows
 execution to jump to a point in the program which has already been passed
@@ -34,7 +34,7 @@ To install:
 === General usage
 
 The syntax here mirrors that of the optional __goto__ extension included
-(disabled by default) as a {joke}[rdoc-label:references] in the Ruby 1.9 sources
+(disabled by default) as a joke (see REFERENCES, below) in the Ruby 1.9 sources
 
 You may label any point in your program with the Kernel#__label__ statement, as
 in:
@@ -114,7 +114,7 @@ After checking out the source, run:
 This task will install any missing dependencies, run the tests/specs,
 and generate the RDoc.
 
-== {REFERENCES}[rdoc-label::references]:
+== REFERENCES:
 
 For competing views on GOTO as a language feature, see
 
