@@ -78,6 +78,13 @@ function):
     right:
         puts("Right!")
 
+Working around this limitation is left as an exercise for the reader.
+
+If you try to __goto__ a label which you have not defined (or not yet
+defined), you're gonna have a hard time (and raise a
+Reconsidered::NoSuchLabel exception).
+
+
 === Local Scope
 
 In addition to the default global scope used with __label__ and __goto__,
