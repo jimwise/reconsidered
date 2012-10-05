@@ -76,11 +76,11 @@ e.g. C, which can be used to jump forward (but only within a given
 function):
 
         if (num == guess)
-	    goto right;
+          goto right;
 	else
-	    goto guess;
+	  goto guess;
 
-    right:
+      right:
         puts("Right!")
 
 Working around this limitation is left as an exercise for the reader.
